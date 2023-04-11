@@ -80,6 +80,27 @@ Actual RegEx Vwill be: TheAwsUniqueId\.execute-api\.us-east-1\.amazonaws\.com
 8. You can get the URL by finding out the API Gateway URL the website is connecting to in the Browser Developer tools or in AWS Console
 8. Select Save. After a few minutes, the header will be attached to all calls to your Lambda function and requests from your browser will be linked to the backend.
 
+
+## What would you see in Dynatrace?
+
+Few screenshots of what you would see in Dynatrace:
+
+### Serverless: Automated Root cause analysis
+
+![](./images/Amplify-Dynatrace-AIOps_Lambda_RootCause-Analysis.gif)
+
+### Serverless: Dynatrace Service Flow with Lambda Built in Dashboard
+
+![](./images/Amplify-Dynatrace-Lambda-ServiceFlow-With-Lambda.gif)
+
+### Serverless: Full Service Flow
+
+![](./images/Amplify-Dynatrace-ServerLess-Lambda-ServiceFlow-Amplify_App.gif)
+
+### Serverless: Real User Monitoring
+
+![](./images/Amplify-Dynatrace-RUM-Session-Replay-User-megatron.gif)
+
 ## Design Notes
 
 Before building the application, I set some requirements on how the cart should behave:
