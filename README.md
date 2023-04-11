@@ -11,6 +11,75 @@ doesn't make any real payment integration at this time.
 
 ![Architecture Diagram](./images/architecture.png)
 
+## Instrumenting this by Dynatrace
+
+### Update the correct IAM Role
+
+IAM permissions have been tricky and thus please update the IAM permissions of the amplifyconsole-backend-role as listed in amplifyconsole-backend-role.md file in this directory
+
+### Installing OneAgent for Lambda
+
+#### Get Dynatrace Token, Environment variables from your Tenant
+
+Official Documentation: https://www.dynatrace.com/support/help/shortlink/aws-lambda-extension
+
+TLDR:
+1. Login to your tenant
+2. Go to Deploy Dynatrace > Install OneAgent > AWS Lambda
+3. Select Runtime to Python
+4. Select 'Traces and Logs' under I want to enable
+5. Select 'Create Token' and save the Access token in a password manager, you will need this in the next step
+6. Select the configuration method to be 'Configure and deploy using AWS SAM'
+7. Select the region where you will be deploying all the resources. Select this appropriately.
+8. Copy the template. You will use this when you create the SSM Parameters.
+
+#### Launch the Cloudformation stack
+
+1. Go to AWS CloudFormation.
+2. Create a new stack, perhaps call it 'Dynatrace Lambda Parameters'
+3. The template is available in this directory with the file name: dt-ssm-parameters.yaml
+4. Use the parameters that were created in the previous step and enter the details accurately
+5. Create the stack and validate that the parameters were created in AWS SSM Parameters
+
+#### Inject JS for RUM
+
+Official Documentation: https://www.dynatrace.com/support/help/shortlink/agentless-rum
+
+TLDR:
+1. Go to Deploy Dynatrace > Agentless Real User Monitoring
+2. Create an application
+3. Copy the JS
+4. Paste it in index.html located in \frontend\public\
+
+
+## Deploy the stack: Option 2 - Automatically deploy backend and frontend using Amplify Console
+
+
+[![One-click deployment](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/dt-arr/aws-serverless-shopping-cart-monitored-by-dt)
+
+1) Use **1-click deployment** button above, and continue by clicking "Connect to Github"
+2) If you don't have an IAM Service Role with admin permissions, select "Create new role" and create the role as described above (amplifyconsole-backend-role). Otherwise proceed to step 5) 
+3) Select "Amplify" from the drop-down, and select "Amplify - Backend Deployment", then click "Next".
+4) Click "Next" again, then give the role a name and click "Create role"
+5) In the Amplify console and select the role you created, then click "Save and deploy"
+6) Amplify Console will fork this repository into your GitHub account and deploy it for you
+7) You should now be able to see your app being deployed in the [Amplify Console](https://console.aws.amazon.com/amplify/home)
+8) Within your new app in Amplify Console, wait for deployment to complete (this should take approximately 12 minutes for the first deploy)
+
+
+#### Connect RUM with backend traces
+
+1. In the Dynatrace menu, select Web, Mobile, Frontend, or Custom applications, depending on your application type.
+2. Select the application you want to connect with your Lambda function.
+3. Select the browse menu (…) in the upper-right corner and select Edit.
+4. Select Capturing > Async web requests and SPAs.
+5. Make sure that your framework of choice is enabled. If your framework is not listed, enable Capture XmlHttpRequest (XHR) for generic support of XHR.
+6. Select Capturing > Advanced setup.
+7. Scroll down to the Enable Real User Monitoring for cross-origin XHR calls section and enter a pattern that matches the URL to your Lambda functions. For example: TheAwsUniqueId.execute-api.us-east-1.amazonaws.com
+Actual RegEx Vwill be: TheAwsUniqueId\.execute-api\.us-east-1\.amazonaws\.com
+8. You can get the URL by finding out the API Gateway URL the website is connecting to in the Browser Developer tools or in AWS Console
+8. Select Save. After a few minutes, the header will be attached to all calls to your Lambda function and requests from your browser will be linked to the backend.
+
 ## Design Notes
 
 Before building the application, I set some requirements on how the cart should behave:
@@ -109,7 +178,7 @@ running the below commands. For a profile named "development": `export AWS_PROFI
 You now have 2 options - you can deploy the backend and run the frontend locally, or you can deploy the whole project 
 using the AWS Amplify console.
 
-## Option 1 - Deploy backend and run frontend locally
+## Option 2 - Deploy backend and run frontend locally
 ### Deploy the Backend
 
 An S3 bucket will be automatically created for you which will be used for deploying source code to AWS. If you wish to 
@@ -141,19 +210,7 @@ Delete the CloudFormation stacks created by this project:
 make backend-delete
 ```
 
-## Option 2 - Automatically deploy backend and frontend using Amplify Console
 
-
-[![One-click deployment](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/dt-arr/aws-serverless-shopping-cart-monitored-by-dt)
-
-1) Use **1-click deployment** button above, and continue by clicking "Connect to Github"
-2) If you don't have an IAM Service Role with admin permissions, select "Create new role". Otherwise proceed to step 5) 
-3) Select "Amplify" from the drop-down, and select "Amplify - Backend Deployment", then click "Next".
-4) Click "Next" again, then give the role a name and click "Create role"
-5) In the Amplify console and select the role you created, then click "Save and deploy"
-6) Amplify Console will fork this repository into your GitHub account and deploy it for you
-7) You should now be able to see your app being deployed in the [Amplify Console](https://console.aws.amazon.com/amplify/home)
-8) Within your new app in Amplify Console, wait for deployment to complete (this should take approximately 12 minutes for the first deploy)
 
 
 ### Clean Up
