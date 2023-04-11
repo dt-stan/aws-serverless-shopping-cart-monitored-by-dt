@@ -15,7 +15,7 @@ doesn't make any real payment integration at this time.
 
 ### Update the correct IAM Role
 
-IAM permissions have been tricky and thus please update the IAM permissions of the amplifyconsole-backend-role as listed in amplifyconsole-backend-role.md file in this directory
+IAM permissions have been tricky and thus please update the IAM permissions of the as listed in [amplifyconsole-backend-role.md](./amplifyconsole-backend-role.md) file in this directory
 
 ### Installing OneAgent for Lambda
 
