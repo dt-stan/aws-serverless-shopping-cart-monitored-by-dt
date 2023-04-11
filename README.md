@@ -89,17 +89,25 @@ Few screenshots of what you would see in Dynatrace:
 
 ![](./images/Amplify-Dynatrace-AIOps_Lambda_RootCause-Analysis.gif)
 
+[Full res Video](./images/Amplify-Dynatrace-AIOps_Lambda_RootCause-Analysis.mp4)
+
 ### Serverless: Dynatrace Service Flow with Lambda Built in Dashboard
 
 ![](./images/Amplify-Dynatrace-Lambda-ServiceFlow-With-Lambda.gif)
+
+[Full res Video](./images/Amplify-Dynatrace-Lambda-ServiceFlow-With-Lambda.mp4)
 
 ### Serverless: Full Service Flow
 
 ![](./images/Amplify-Dynatrace-ServerLess-Lambda-ServiceFlow-Amplify_App.gif)
 
+[Full res Video](./images/Amplify-Dynatrace-ServerLess-Lambda-ServiceFlow-Amplify_App.mp4)
+
 ### Serverless: Real User Monitoring
 
 ![](./images/Amplify-Dynatrace-RUM-Session-Replay-User-megatron.gif)
+
+[Full res Video](./images/Amplify-Dynatrace-RUM-Session-Replay-User-megatron.mp4)
 
 ## Design Notes
 
