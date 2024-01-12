@@ -112,17 +112,53 @@ const migrateCart = ({
         })
 }
 
-const checkoutCart = ({
-    commit
-}) => {
-    commit("setLoading", {value: true, message: "This is where we'd handle payment before clearing the cart..."})
+
+const checkoutCart = ({ commit, state }) => {
+    // Calculate the total value of the cart and gather product details
+    const cartDetails = state.cart.map(product => ({
+        ProductName: product.productDetail.name,
+        ProductCategory: product.productDetail.category,
+        //ProductId:product.productDetail.productId,
+        quantity: product.quantity,
+        priceInCents: product.productDetail.price,
+        priceInDollars: (product.productDetail.price / 100).toFixed(2), // Ensure 2 decimal places
+
+    }));
+
+    const totalValueInCents = cartDetails.reduce((total, product) => {
+        return total + product.quantity * product.priceInCents;
+    }, 0);
+
+    const totalValueInDollars = cartDetails.reduce((total, product) => {
+        return total + product.quantity * product.priceInDollars;
+    }, 0);
+    
+    // Send business event to Dynatrace
+    const dynatraceAttributes = {
+        "event.name": "Checkout",
+        "totalValueInCents": totalValueInCents,
+        "totalValueInDollars": totalValueInDollars,
+        "currency": "USD",  // Assuming the currency is USD
+        "products": cartDetails,
+        // Add additional attributes as needed
+    };
+
+    // Replace the placeholder with the actual Dynatrace object and event name
+    dynatrace.sendBizEvent('com.serverlessshopping.checkout', dynatraceAttributes);
+
+    // Proceed with the checkout process
+    commit("setLoading", { value: true, message: "This is where we'd handle payment before clearing the cart..." });
+
+    // Simulate checkout process
     cartCheckout()
         .then(() => {
-            commit("setUpCart", [])
-            setTimeout(function() {commit("setLoading", {value: false})}, 3000)
-            setTimeout(function() {router.push("/")}, 3200)
-        })
-}
+            commit("setUpCart", []);
+            setTimeout(() => { commit("setLoading", { value: false }); }, 3000);
+            setTimeout(() => { router.push("/"); }, 3200);
+        });
+};
+
+
 
 export default {
     setLoading,
