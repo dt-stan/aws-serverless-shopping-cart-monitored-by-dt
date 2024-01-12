@@ -1,6 +1,8 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 
+## BEFORE YOU RUN THIS TEMPLATE, TRY TO MODIFY THE PATH SUCH THAT YOU CAN IDENTIFY IT E.G., /dt/yourname/LambdaExecWrapper
+
 Parameters:
   DtAwsLambdaExecWrapperSSMParameter:
     Type: String
@@ -26,8 +28,12 @@ Parameters:
     Type: String
     Description: Enter the Token provided by Dynatrace. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
     Default: 'dt0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+  DtLogCollectionAuthTokenSSMParameter:
+    Type: String
+    Description: Enter the Token provided by Dynatrace. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
+    Default: 'dt0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   DtOpenTelemetryEnableIntegrationSSMParameter:
-    Description: Select True Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
+    Description: Type True Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
     Type: String
     Default: 'true'
 
@@ -37,7 +43,7 @@ Resources:
     Properties:
       Type: String
       Description: Parameter for DtAwsLambdaExecWrapper
-      Name: /dt/LambdaExecWrapper 
+      Name: /dt/amrith/LambdaExecWrapper 
       Value:
         Ref: DtAwsLambdaExecWrapperSSMParameter
   DtOneAgentLambdaARNSSM:
@@ -45,14 +51,14 @@ Resources:
     Properties:
       Type: String
       Description: Parameter for DtOneAgentLambdaARN
-      Name: /dt/OneAgentLambdaARN
+      Name: /dt/amrith/OneAgentLambdaARN
       Value: 
         Ref: DtOneAgentLambdaARNSSMParameter
   DtTenantSSM:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /dt/Tenant
+      Name: /dt/amrith/Tenant
       Description: Parameter for DtTenant
       Value:
         Ref: DtTenantSSMParameter
@@ -60,7 +66,7 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /dt/dtClusterId
+      Name: /dt/amrith/dtClusterId
       Description: Parameter for DtClusterId
       Value: 
         Ref: DtClusterIdSSMParameter
@@ -68,7 +74,7 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /dt/ConnectionBaseUrl
+      Name: /dt/amrith/ConnectionBaseUrl
       Description: Parameter for DtConnectionBaseUrl
       Value: 
         Ref: DtConnectionBaseUrlSSMParameter
@@ -76,15 +82,23 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /dt/ConnectionAuthToken
+      Name: /dt/amrith/ConnectionAuthToken
       Description: Parameter for DtConnectionAuthToken
       Value: 
         Ref: DtConnectionAuthTokenSSMParameter
+  DtLogCollectionAuthTokenSSM:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Type: String
+      Name: /dt/amrith/LogCollectionAuthToken
+      Description: Parameter for DtConnectionAuthToken
+      Value: 
+        Ref: DtLogCollectionAuthTokenSSMParameter
   DtOpenTelemetryEnableIntegrationSSM:
     Type: AWS::SSM::Parameter
     Properties:
       Type: String
-      Name: /dt/OpenTelemetryEnableIntegration
+      Name: /dt/amrith/OpenTelemetryEnableIntegration
       Description: Parameter for DtOpenTelemetryEnableIntegration
       Value: 
         Ref: DtOpenTelemetryEnableIntegrationSSMParameter
@@ -114,6 +128,10 @@ Outputs:
     Value: !Ref DtConnectionAuthTokenSSM
     Export:
       Name: !Sub "${AWS::StackName}-DtConnectionAuthTokenSSM"
+  DtLogCollectionAuthTokenSSMParameterName:
+    Value: !Ref DtLogCollectionAuthTokenSSM
+    Export:
+      Name: !Sub "${AWS::StackName}-DtLogCollectionTokenSSM"
   DtOpenTelemetryEnableIntegrationSSMParameterName:
     Value: !Ref DtOpenTelemetryEnableIntegrationSSM
     Export:

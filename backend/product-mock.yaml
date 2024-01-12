@@ -7,29 +7,35 @@ Description: >
 Parameters:
   AllowedOrigin:
     Type: 'String'
+    Description: The origin that will be used in CORS.
+    Default: 'https://xxxxxx.amplifyapp.com'
 
   #Dynatrace SSM Parameters  
   DtOneAgentLambdaARNSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/OneAgentLambdaARN'
+    Default: '/dt/amrith/OneAgentLambdaARN'
   DtAwsLambdaExecWrapperSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/LambdaExecWrapper'
+    Default: '/dt/amrith/LambdaExecWrapper'
   DtTenantSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/Tenant'
+    Default: '/dt/amrith/Tenant'
   DtClusterIdSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/dtClusterId'
+    Default: '/dt/amrith/dtClusterId'
   DtConnectionBaseUrlSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/ConnectionBaseUrl'
+    Default: '/dt/amrith/ConnectionBaseUrl'
   DtConnectionAuthTokenSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/ConnectionAuthToken'
+    Default: '/dt/amrith/ConnectionAuthToken'
+  DtLogCollectionAuthTokenSSM:
+    Type: 'AWS::SSM::Parameter::Value<String>'
+    Default: '/dt/amrith/LogCollectionAuthToken'    
   DtOpenTelemetryEnableIntegrationSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/OpenTelemetryEnableIntegration'
+    Default: '/dt/amrith/OpenTelemetryEnableIntegration'
+    
 
 Globals:
   Function:
@@ -52,6 +58,7 @@ Globals:
         DT_CLUSTER_ID: !Ref DtClusterIdSSM
         DT_CONNECTION_BASE_URL: !Ref DtConnectionBaseUrlSSM
         DT_CONNECTION_AUTH_TOKEN: !Ref DtConnectionAuthTokenSSM
+        DT_LOG_COLLECTION_AUTH_TOKEN: !Ref DtLogCollectionAuthTokenSSM
         DT_OPEN_TELEMETRY_ENABLE_INTEGRATION: !Ref DtOpenTelemetryEnableIntegrationSSM
   Api:
     EndpointConfiguration: REGIONAL
@@ -79,7 +86,7 @@ Resources:
   GetProductsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: product-mock-service/
+      CodeUri: product-mock-service/      
       Handler: get_products.lambda_handler
       Events:
         ListCart:
