@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 
-## BEFORE YOU RUN THIS TEMPLATE, TRY TO MODIFY THE PATH SUCH THAT YOU CAN IDENTIFY IT E.G., /dt/yourname/LambdaExecWrapper
+## BEFORE YOU RUN THIS TEMPLATE, TRY TO MODIFY THE SSM PARAMETER NAME PATH UNDER THE RESOURCES SECTION SUCH THAT YOU CAN IDENTIFY IT BASED ON YOUR ORGANISATION. I have used something that includes my username /dt/yourname/LambdaExecWrapper
 
 Parameters:
   DtAwsLambdaExecWrapperSSMParameter:
@@ -15,22 +15,22 @@ Parameters:
   DtTenantSSMParameter:
     Type: String
     Description: Enter the dynatrace tenantId, usually in the format of abc123456. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.
-    Default: 'gkp23840'
+    Default: 'abc12345'
   DtClusterIdSSMParameter:
     Type: String
     Description: Enter the clusterId provided by Dynatrace.E.g. 123456 or -123456. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.
-    Default: '-127324864'
+    Default: '-123456789'
   DtConnectionBaseUrlSSMParameter:
     Type: String
     Description: Enter the Dynatrace URL https://<tenantid>.live.dynatrace.com
     Default: 'https://xxxxxxxx.live.dynatrace.com'
   DtConnectionAuthTokenSSMParameter:
     Type: String
-    Description: Enter the Token provided by Dynatrace. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
+    Description: Enter the Connection Token provided by Dynatrace. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
     Default: 'dt0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   DtLogCollectionAuthTokenSSMParameter:
     Type: String
-    Description: Enter the Token provided by Dynatrace. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
+    Description: Enter the Log Collection Token provided by Dynatrace. Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
     Default: 'dt0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   DtOpenTelemetryEnableIntegrationSSMParameter:
     Description: Type True Refer Install OneAgent for Lambda in the Deploy Dynatrace section.  
