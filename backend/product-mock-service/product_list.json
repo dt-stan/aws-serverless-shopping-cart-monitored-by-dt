@@ -11,6 +11,7 @@
             "weight": 54,
             "width": 905
         },
+        "icon": "https://uxwing.com/wp-content/themes/uxwing/download/fruits-vegetables/strawberry-fruit-icon.svg",
         "pictures": [
             "http://placehold.it/32x32"
         ],
@@ -22,8 +23,7 @@
             "eiusmod",
             "irure",
             "tempor"
-        ],
-        "icon": "https://uxwing.com/wp-content/themes/uxwing/download/fruits-vegetables/strawberry-fruit-icon.svg"
+        ]
     },
     {
         "category": "sweets",
