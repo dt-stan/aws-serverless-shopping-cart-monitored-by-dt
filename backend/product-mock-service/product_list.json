@@ -2,7 +2,7 @@
     {
         "category": "fruit",
         "createdDate": "2017-04-17T01:14:03 -02:00",
-        "description": "Culpa non veniam deserunt dolor irure elit cupidatat culpa consequat nulla irure aliqua.",
+        "description": "Juicy, plump strawberries, handpicked and packaged for freshness, a burst of sweetness in every bite",
         "modifiedDate": "2019-03-13T12:18:27 -01:00",
         "name": "packaged strawberries",
         "package": {
@@ -12,7 +12,7 @@
             "width": 905
         },
         "pictures": [
-            "http://placehold.it/32x32"
+            "https://uxwing.com/wp-content/themes/uxwing/download/fruits-vegetables/strawberry-fruit-icon.svg"
         ],
         "price": 716,
         "productId": "4c1fadaa-213a-4ea8-aa32-58c217604e3c",
