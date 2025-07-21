@@ -20,6 +20,9 @@ backend:
 frontend:
   phases:
     # IMPORTANT - Please verify your build commands
+    preBuild:
+      commands:
+        - export NODE_OPTIONS=--openssl-legacy-provider
     build:
       commands:
         - make frontend-build
