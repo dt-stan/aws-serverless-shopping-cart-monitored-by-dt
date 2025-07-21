@@ -20,28 +20,28 @@ Parameters:
   #Dynatrace SSM Parameters  
   DtOneAgentLambdaARNSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/OneAgentLambdaARN'
+    Default: '/dt/sswitalski/OneAgentLambdaARN'
   DtAwsLambdaExecWrapperSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/LambdaExecWrapper'
+    Default: '/dt/sswitalski/LambdaExecWrapper'
   DtTenantSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/Tenant'
+    Default: '/dt/sswitalski/Tenant'
   DtClusterIdSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/dtClusterId'
+    Default: '/dt/sswitalski/dtClusterId'
   DtConnectionBaseUrlSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/ConnectionBaseUrl'
+    Default: '/dt/sswitalski/ConnectionBaseUrl'
   DtConnectionAuthTokenSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/ConnectionAuthToken'
+    Default: '/dt/sswitalski/ConnectionAuthToken'
   DtLogCollectionAuthTokenSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/LogCollectionAuthToken'    
+    Default: '/dt/sswitalski/LogCollectionAuthToken'    
   DtOpenTelemetryEnableIntegrationSSM:
     Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/dt/amrith/OpenTelemetryEnableIntegration'
+    Default: '/dt/sswitalski/OpenTelemetryEnableIntegration'
 
 Globals:
   Function:
